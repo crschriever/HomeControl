@@ -1,0 +1,39 @@
+body{
+	background-color: lightgray;
+	color:#424242;
+	font-family: Raleway, Arial, Helvetica, sans-serif;
+	letter-spacing: 1.2px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: Raleway, Arial, Helvetica, sans-serif;
+}
+
+p, div {
+	font-family: Raleway, Arial, Helvetica, sans-serif;
+}
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) {
+
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) {
+
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+
+}

@@ -1,0 +1,16 @@
+<meta charset="UTF-8">
+<title><%= pageTitle %></title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Carl Schriever">
+<meta name="description" content="<%= pageDescription %>">
+<meta name="robots" content="index, follow">
+<% if (locals.useBootstrap) { %>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<% } %>
+<% if (locals.pageCss) for (var i = 0; i < pageCss.length; i++) { %>
+    <link rel="stylesheet" type="text/css" href="/css/<%= pageCss[i] %>.css">
+<% } %>
+<link href="https://fonts.googleapis.com/css?family=Raleway:200,400" rel="stylesheet">
+<!--<link rel="shortcut icon" href="/favicon.ico"/>-->
