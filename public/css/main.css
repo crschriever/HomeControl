@@ -13,6 +13,60 @@ p, div {
 	font-family: Raleway, Arial, Helvetica, sans-serif;
 }
 
+iframe {
+	width: 100vw;
+	height: 100vh;
+}
+
+.container-full {
+	width: 100vw;
+	height: 100vh;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.center {
+	margin:0 auto;
+}
+
+.vertical-center {
+	position: relative;
+	top:50%;
+}
+
+.img-background {	
+	background: url(https://static.pexels.com/photos/9135/sky-clouds-blue-horizon.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover; 
+}
+
+.light-gray {
+	color: #eeeeee;
+}
+
+.dark-gray {
+	color: #222222;
+}
+
+.white {
+	color: white;
+}
+
+.date {
+	font-size: 3.5em; 
+	padding-bottom: 15px;
+	font-weight:900;
+}
+
+.time {
+	font-size: 1.9em; 	
+	font-weight:900;
+}
+
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
 

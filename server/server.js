@@ -8,6 +8,7 @@ var app = express();
 var socket = require('socket.io')(); 
 
 app.set('view engine', 'ejs');
+app.set('views', 'server/views');
 app.set('socket', socket);
 
 // use morgan to log requests to the console
@@ -15,7 +16,7 @@ app.set('socket', socket);
 
 app.use(express.static(getPath('public')));
 app.use(require('./routes/index'));
-app.use(require('./routes/random'));
+app.use(require('./routes/pages'));
 app.use(function (req, res, next) {
     res.status(404).send("<p>This page doesn't exist</p><a href=\"/\">return to home</a>");
 })

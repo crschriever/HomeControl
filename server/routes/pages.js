@@ -17,4 +17,16 @@ router.route('/random3')
         res.send("Random3")
     });
 
+router.route('/clock')
+    .get(function (req, res) {
+        res.render('clock', {
+            pageId: "Clock",
+            pageTitle: "Clock",
+            pageDescription: "Home Control's clock page.",
+            pageCss: ['main'],
+            pageScripts: ['clock', 'weather'],
+            useBootstrap: true,
+        });
+    });
+
 module.exports = router;
