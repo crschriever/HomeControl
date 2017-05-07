@@ -5,13 +5,20 @@ $(function() {
         var $form = $('.switcher-form');
         var $url = $('#url');
         var $submit = $('#switcher-submit');
-
-        console.log($form);
-
-        $form.on('submit', function(e) {
-            e.preventDefault();
-            socket.emit('changePage', {
-                location: $url.val()
+        var $altButtons = $('.alt-submit');
+        
+        $altButtons.each(function(index, value) {
+            $(value).on('click', function(e) {
+                e.preventDefault();
+                if ($(this).data('href')) {
+                    socket.emit('changePage', {
+                        location: $(this).data('href')
+                    });
+                } else {
+                    socket.emit('changePage', {
+                        location: $url.val()
+                    });
+                }
             });
         });
     });

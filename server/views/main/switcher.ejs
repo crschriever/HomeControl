@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<% include ../partials/templates/head.ejs %>
+</head>
+
+<body id="<%= pageId %>">
+
+<div class="container">
+    <h5>Current Site: None</h5>
+    <form class="switcher-form">
+        <div class="form-group">
+            <button data-href="http://www.clocktab.com/" class="btn btn-default pull-left alt-submit">Time</button>
+            <button data-href="http://www.accuweather.com/en/us/atlanta-ga/30303/weather-forecast/348181" class="btn btn-default pull-left alt-submit">Weather</button>            
+        </div>
+        <div class="form-group">
+            <label for="url"></label>
+            <input type="text" class="form-control" id="url" placeholder="input url">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-default pull-left alt-submit" id="switcher-submit">Change</button>
+        </div>
+        <input type="hidden" value="">
+    </form>
+</div>
+
+<% include ../partials/templates/scripts.ejs %>
+<script type="text/javascript">
+</script>
+
+</body>
+
+</html>

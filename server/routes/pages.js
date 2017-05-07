@@ -19,7 +19,7 @@ router.route('/random3')
 
 router.route('/clock')
     .get(function (req, res) {
-        res.render('clock', {
+        res.render('main/clock', {
             pageId: "Clock",
             pageTitle: "Clock",
             pageDescription: "Home Control's clock page.",
