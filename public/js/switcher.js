@@ -1,5 +1,5 @@
 $(function() {
-    var socket = io('home.carlschriever.com');
+    var socket = io('https://home.carlschriever.com');
 
     socket.on('connect', function(){
         var $form = $('.switcher-form');
