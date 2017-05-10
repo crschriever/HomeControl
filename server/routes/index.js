@@ -15,7 +15,7 @@ router.route('/')
     });
 
 router.route('/switcher')
-    .get(function (req, res) {
+    .get(isLoggedIn, function (req, res) {
         res.render('main/switcher', {
             pageId: "Switcher",
             pageTitle: "Home Control Switcher",
@@ -24,12 +24,12 @@ router.route('/switcher')
             pageScripts: ['switcher'],
             useBootstrap: true,
             useSocket: true,
-            csrfToken: res.csrfToken()
+            userID: req.session.passport.user
         });
     });
 
 router.route('/viewer')
-    .get(function (req, res) {
+    .get(isLoggedIn, function (req, res) {
         res.render('main/viewer', {
             pageId: "Viewer",
             pageTitle: "Home Control",
@@ -37,8 +37,16 @@ router.route('/viewer')
             pageCss: ['main'],
             pageScripts: ['viewer'],
             useBootstrap: true,
-            useSocket: true
+            useSocket: true,
+            userID: req.session.passport.user
         });
     });
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/user/login');
+}
 
 module.exports = router;

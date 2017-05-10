@@ -1,10 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var csrf = require('csurf');
-var csrfProtection = csrf();
+var passport = require('passport');
 
-router.route('/user/signup')
-    .get(function (req, res) {
+var csrfProtection = csrf();
+router.use(csrfProtection);
+
+router.route('/signup')
+    .get(function(req, res) {
         res.render('user/signup', {
             pageId: "Signup",
             pageTitle: "Sign up",
@@ -12,10 +15,16 @@ router.route('/user/signup')
             pageCss: ['main'],
             pageScripts: [],
             useBootstrap: true,
-        });
-    });
+            csrfToken: req.csrfToken(),
+            error: req.flash('error')
+        })
+    }).post(passport.authenticate('local.signup', {
+        successRedirect: '/',
+        failureRedirect:'/user/signup',
+        failureFlash: true
+    }));
 
-router.route('/user/login')
+router.route('/login')
     .get(function (req, res) {
         res.render('user/login', {
             pageId: "Login",
@@ -24,7 +33,19 @@ router.route('/user/login')
             pageCss: ['main'],
             pageScripts: [],
             useBootstrap: true,
+            csrfToken: req.csrfToken(),
+            error: req.flash('error')
         });
+    }).post(passport.authenticate('local.login', {
+        successRedirect: '/',
+        failureRedirect:'/user/login',
+        failureFlash: true
+    }));
+
+router.route('/logout')
+    .get(function(req, res) {
+        req.logout();
+        res.redirect('/');
     });
 
 module.exports = router;

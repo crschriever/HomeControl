@@ -3,8 +3,12 @@ $(function() {
 
     socket.on('connect', function(){
         var $frame = $('iframe');
-
         var loading = false;
+        var userID = $('#user-id-cont').text();
+
+        socket.emit('joinRoom', {
+            userID: userID
+        });
 
         socket.on('newPage', function(data) {
             console.log("New page");

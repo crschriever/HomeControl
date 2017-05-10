@@ -6,6 +6,11 @@ $(function() {
         var $url = $('#url');
         var $submit = $('#switcher-submit');
         var $altButtons = $('.alt-submit');
+        var userID = $('#user-id-cont').text();
+
+        socket.emit('joinRoom', {
+            userID: userID
+        });
         
         $altButtons.each(function(index, value) {
             $(value).on('click', function(e) {
