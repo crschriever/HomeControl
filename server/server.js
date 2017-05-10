@@ -102,11 +102,11 @@ io.on('connection', function(socket) {
     socket.on('joinRoom', function(data) {
         socket.userRoom = data.userID;
         socket.join(data.userID);
+        console.log('joining room ' + data.userID);
     });
 
-    console.log(io.sockets.adapter.rooms);
-
     socket.on('changePage', function(data) {
+        console.log('changing room ' + socket.userRoom);        
         io.to(socket.userRoom).emit('newPage', data);
     });
 });
