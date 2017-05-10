@@ -1,5 +1,5 @@
 $(function() {
-    var socket = io();
+    var socket = io('home.carlschriever.com');
 
     socket.on('connect', function(){
         var $frame = $('iframe');
