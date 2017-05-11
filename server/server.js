@@ -31,6 +31,9 @@ if (dev) {
     addDefaultUsers();
 }
 
+// Set socket url for socket.io to use in scripts
+app.locals.socketTarget = nconf.get('http:url') || 'localhost:3000';
+
 app.set('view engine', 'ejs');
 app.set('views', 'server/views');
 

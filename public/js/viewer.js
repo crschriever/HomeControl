@@ -1,5 +1,5 @@
 $(function() {
-    var socket = io('https://home.carlschriever.com');
+    var socket = io(socketTarget);
 
     socket.on('connect', function(){
         var $content = $('#viewer-content');
