@@ -2,7 +2,7 @@ $(function() {
     var socket = io('https://home.carlschriever.com');
 
     socket.on('connect', function(){
-        var $frame = $('iframe');
+        var $content = $('#viewer-content');
         var loading = false;
         var userID = $('#user-id-cont').text();
 
@@ -11,20 +11,16 @@ $(function() {
         });
 
         socket.on('newPage', function(data) {
-            console.log("New page");
+            console.log("New page: " + data.location);
             if (loading) {
+                console.log("Still loading");
                 return;
             }
             loading = true;
-            if (data.location.includes('http') || data.location.includes('www.')) {
-                $frame.attr('src', data.location);
-            } else {
-                $frame.attr('src', '/' + data.location);
-            }
-            $frame.on('load', function(){
+            $.ajax('/' + data.location, {success: function(data) {
+                $content.html(data);
                 loading = false;
-                $frame.contents().find('body').append("<script>console.log(\"YOYOYO\");</script>");
-            });
+            }});
         });
     });
 });
