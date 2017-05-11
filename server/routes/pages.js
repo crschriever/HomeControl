@@ -1,20 +1,20 @@
 var express = require('express');
 var router = express.Router();
-var path = require('path')
+var path = require('path');
 
 router.route('/random1')
     .get(function (req, res) {
-        res.send("Random1")
+        res.send("Hi Elena");
     });
 
 router.route('/random2')
     .get(function (req, res) {
-        res.send("Random2")
+        res.send("How're you little spaz?");
     });
 
 router.route('/random3')
     .get(function (req, res) {
-        res.send("Random3")
+        res.send("Random3");
     });
 
 router.route('/clock')
