@@ -52,16 +52,13 @@ router.post('/switch', function(req, res) {
     let page = req.body.result.parameters.page;
     indexRoute.changePage(page);
     res.json({
-        "speech": "Showing " + page,
-        "displayText": "Showing " + page,        
-        "data": {
-            "expect_user_response": false,
-            "is_ssml": false,
-            "permissions_request": {},
-            "no_input_prompts": {}
-        },
-        "contextOut": [],
-        "source": "Home.CarlSchriever.com"
+        "conversation_token": req.body.conversation.conversation_token,
+        "expect_user_response": false,
+        "final_response": {
+            "speech_response": {
+                "text_to_speech": "Showing " + page + "!"
+            }
+        }
     });
 });
 
