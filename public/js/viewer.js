@@ -17,10 +17,14 @@ $(function() {
                 return;
             }
             loading = true;
-            $.ajax('/' + data.location, {success: function(data) {
-                $content.html(data);
-                loading = false;
-            }});
+            $.ajax('/' + data.location, {
+                success: function(data) {
+                    $content.html(data);
+                },
+                complete: function() {
+                    loading = false;    
+                }
+            });
         });
     });
 });

@@ -67,7 +67,7 @@ app.use(passport.session());
 // Set up routes and static files
 app.use(express.static(getPath('public')));
 app.use('/user', require('./routes/login'));
-app.use(require('./routes/index'));
+app.use(require('./routes/index')(changePage).router);
 app.use(require('./routes/pages'));
 
 // catch 404 and forward to error handler
@@ -113,6 +113,10 @@ io.on('connection', function(socket) {
         io.to(socket.userRoom).emit('newPage', data);
     });
 });
+
+function changePage(newPage) {
+    io.emit('newPage', {location: newPage});   
+}
 
 function getPath(file) {
     return path.join(__dirname, '../' + file);
