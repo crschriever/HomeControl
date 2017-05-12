@@ -56,6 +56,7 @@ router.post('/switch', function(req, res) {
         "speech": "Showing " + page,        
         "data": {},
         "contextOut": [],
+        "expectUserResponse": false,
         "source": "Home.CarlSchriever.com"
     });
 });
