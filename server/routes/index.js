@@ -49,7 +49,8 @@ router.route('/viewer')
     });
 
 router.post('/switch', function(req, res) {
-    let page = req.body.location;
+    let page = req.body.result.parameters.page;
+    console.log(page);
     indexRoute.changePage(page);
     res.json({
         "speech": "Showing " + page,
