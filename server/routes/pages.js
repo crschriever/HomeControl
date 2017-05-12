@@ -2,6 +2,11 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 
+router.route('/home')
+    .get(function (req, res) {
+        res.send("Temporary Home page");
+    });
+
 router.route('/random1')
     .get(function (req, res) {
         res.send("Hi Elena");
