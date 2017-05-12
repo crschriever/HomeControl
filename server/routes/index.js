@@ -53,8 +53,13 @@ router.post('/switch', function(req, res) {
     indexRoute.changePage(page);
     res.json({
         "speech": "Showing " + page,
-        "speech": "Showing " + page,        
-        "data": {},
+        "displayText": "Showing " + page,        
+        "data": {
+            "expect_user_response": false,
+            "is_ssml": false,
+            "permissions_request": {},
+            "no_input_prompts": {}
+        },
         "contextOut": [],
         "source": "Home.CarlSchriever.com"
     });
