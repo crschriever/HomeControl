@@ -20,7 +20,9 @@ $(function() {
                         location: $(this).data('href')
                     });
                 } else {
-                    $.post('/switch', {location: $url.val()});
+                    socket.emit('changePage', {
+                        location: $url.val()
+                    });
                 }
             });
         });

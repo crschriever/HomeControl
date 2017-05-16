@@ -12,6 +12,7 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var validator = require('express-validator');
 var MongoStore = require('connect-mongo')(session);
+var currentPage = {location: "home"};
 
 // Use config file for nconf
 nconf.file(getPath('server/config.json'));
@@ -108,8 +109,11 @@ io.on('connection', function(socket) {
         console.log('joining room ' + data.userID);
     });
 
+    socket.emit('newPage', currentPage);
+
     socket.on('changePage', function(data) {
-        console.log('changing room ' + socket.userRoom);        
+        console.log('changing room ' + socket.userRoom);
+        currentPage = data;      
         io.to(socket.userRoom).emit('newPage', data);
     });
 });
