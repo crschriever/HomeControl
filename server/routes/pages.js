@@ -36,7 +36,7 @@ router.route('/clock')
 
 router.route('/calendar-month')
     .get(function(req, res) {
-        res.send('<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=crschriever%40gmail.com&amp;color=%2329527A&amp;src=c0o5k11fbc01q37b085kens8ju3p2lom%40import.calendar.google.com&amp;color=%2323164E&amp;src=lh6rbkc5mmchli5qehorh3c0cn6kbum8%40import.calendar.google.com&amp;color=%23875509&amp;src=en.usa%23holiday%40group.v.calendar.google.com&amp;color=%2329527A&amp;ctz=America%2FNew_York" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>');
+        res.send('<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=1&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=crschriever%40gmail.com&amp;color=%2329527A&amp;src=c0o5k11fbc01q37b085kens8ju3p2lom%40import.calendar.google.com&amp;color=%2323164E&amp;src=lh6rbkc5mmchli5qehorh3c0cn6kbum8%40import.calendar.google.com&amp;color=%23875509&amp;src=en.usa%23holiday%40group.v.calendar.google.com&amp;color=%2329527A&amp;ctz=America%2FNew_York" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>');
     });
 
 router.route('/calendar-agenda')

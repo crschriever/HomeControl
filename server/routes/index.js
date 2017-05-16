@@ -49,18 +49,37 @@ router.route('/viewer')
     });
 
 router.post('/switch', function(req, res) {
-    let page = req.body.result.parameters.page;
-    indexRoute.changePage(page);
-    res.json({
-        "speech": "Showing " + page,
-        "displayText": "Showing " + page,
-        "source": "home.carlschriever.com",
-        "data": {
-            "google": {
-                "expect_user_response": false,
+    let action = req.body.result.action;
+
+    console.log(req.body.result);
+
+    // Show page intent
+    if (action === 'show_page') {
+        let page = req.body.result.parameters.page;
+        indexRoute.changePage(page);
+        res.json({
+            "speech": "Showing " + page,
+            "displayText": "Showing " + page,
+            "source": "home.carlschriever.com",
+            "data": {
+                "google": {
+                    "expect_user_response": false,
+                }
             }
-        }
-    });
+        });
+    } else if (action === 'activate_button') {
+        let button = req.body.result.parameters.button_id;
+        res.json({
+            "speech": "Pressing " + button,
+            "displayText": "Pressing " + button,
+            "source": "home.carlschriever.com",
+            "data": {
+                "google": {
+                    "expect_user_response": false,
+                }
+            }
+        });
+    }
 });
 
 function isLoggedIn(req, res, next) {
