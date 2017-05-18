@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<% include ../templates/head.ejs %>
+</head>
+
+<body id="<%= pageId %>">
+
+<div class="container-full weather-container-full">
+    <p id="weather-last-update" class=""> Last updated: <%= new Date().toLocaleTimeString("en-us") %></p>
+    <div class="weather-container vertical-center">
+        <div id="weather-sub-container" class="horizontal-center">
+            <h2 id="weather-city-name" class=""><%= pageWeather.cityName %></h2>
+            <p>
+                <img id="weather-img" src="http://openweathermap.org/img/w/<%= pageWeather.icon %>.png">
+                <span id="weather-temperature"><%= pageWeather.temperature %>,</span>
+                <span id="weather-main" class=""><%= pageWeather.main %></span>
+            </p>
+        </div>
+        <div id="weather-hourly-container" class="horizontal-center">
+            <% for(let i = 0; i < pageWeather.hours.length; i++) { let hour = pageWeather.hours[i]; %>
+
+                <div class="weather-hour-container">
+                    <h3 class="hour-date"><%= hour.date %></h3>
+                    <div class="weather-min bg-info"><%= hour.min %></div>
+                    <div class="weather-max bg-danger"><%= hour.max %></div>
+                    <div class="weather-main"><%= hour.main %></div>
+                </div>
+                
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<% include ../templates/scripts.ejs %>
+<script type="text/javascript">
+</script>
+
+</body>
+
+</html>

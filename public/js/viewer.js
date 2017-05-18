@@ -20,6 +20,9 @@ $(function() {
             $.ajax('/' + data.location, {
                 success: function(data) {
                     $content.html(data);
+                    if (center) {
+                        center();
+                    }
                 },
                 complete: function() {
                     loading = false;    
