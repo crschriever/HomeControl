@@ -69,7 +69,7 @@ router.post('/switch', function(req, res) {
         });
     } else if (action === 'show_weather') {
         let location = req.body.result.parameters.location || 'Atlanta';
-        indexRoute.changePage('/weather/' + location);
+        indexRoute.changePage('weather/' + location);
         res.json({
             "speech": "Showing weather for " + location,
             "displayText": "Showing weather for " + location,
