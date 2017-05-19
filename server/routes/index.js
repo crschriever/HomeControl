@@ -67,6 +67,19 @@ router.post('/switch', function(req, res) {
                 }
             }
         });
+    } else if (action === 'show_weather') {
+        let location = req.body.result.parameters.location || 'Atlanta';
+        indexRoute.changePage('/weather/' + location);
+        res.json({
+            "speech": "Showing weather for " + location,
+            "displayText": "Showing weather for " + location,
+            "source": "home.carlschriever.com",
+            "data": {
+                "google": {
+                    "expect_user_response": false,
+                }
+            }
+        });
     } else if (action === 'activate_button') {
         let button = req.body.result.parameters.button_id;
         res.json({
