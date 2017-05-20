@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<% include ../templates/head.ejs %>
-</head>
-
-<body id="<%= pageId %>">
-
 <div class="container-full weather-container-full">
     <p id="weather-last-update" class=""> Last updated: <%= new Date().toLocaleTimeString("en-us") %></p>
     <div class="weather-container vertical-center">
@@ -35,9 +26,3 @@
 </div>
 
 <% include ../templates/scripts.ejs %>
-<script type="text/javascript">
-</script>
-
-</body>
-
-</html>

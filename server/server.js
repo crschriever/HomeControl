@@ -12,7 +12,7 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var validator = require('express-validator');
 var MongoStore = require('connect-mongo')(session);
-var currentPage = {location: "home"};
+var currentPage = {location: "clock"};
 
 // Use config file for nconf
 nconf.file(getPath('server/config.json'));
@@ -119,6 +119,7 @@ io.on('connection', function(socket) {
 });
 
 function changePage(newPage) {
+    currentPage = {location: newPage};
     io.emit('newPage', {location: newPage});   
 }
 
