@@ -19,7 +19,7 @@ router.route('/signup')
             error: req.flash('error')
         })
     }).post(passport.authenticate('local.signup', {
-        successRedirect: '/',
+        successRedirect: '/viewer',
         failureRedirect:'/user/signup',
         failureFlash: true
     }));
@@ -37,7 +37,7 @@ router.route('/login')
             error: req.flash('error')
         });
     }).post(passport.authenticate('local.login', {
-        successRedirect: '/',
+        successRedirect: '/viewer',
         failureRedirect:'/user/login',
         failureFlash: true
     }));
