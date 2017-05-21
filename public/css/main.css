@@ -75,6 +75,7 @@ iframe {
 	-o-background-size: cover;
 	background-size: cover;
 	color:#222222;
+	font-weight: 700;
 }
 
 .weather-container-full::before {
@@ -111,6 +112,7 @@ iframe {
 }
 
 #weather-city-name {
+	font-weight: 900;
 	font-size: 1.8em;
 }
 
@@ -131,6 +133,7 @@ iframe {
 }
 
 .hour-date {
+	font-weight: 700;
 	margin-bottom: 0;
 }
 
