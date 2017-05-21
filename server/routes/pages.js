@@ -75,9 +75,9 @@ router.route('/weather/:city')
                 };
 
                 for (let i = 0; i < 5; i++) {
-                    var cHour = hourly.list[i];
+                    let cHour = hourly.list[i];
                     weather.hours[i] = {
-                        date: dateFormat(new Date(cHour.dt_txt), 'ddd mmm d, h TT'),
+                        date: dateFormat(new Date(cHour.dt_txt + ' UTC'), 'ddd mmm d, h TT'),
                         min: (((9 / 5)  * cHour.main.temp_min) - 459.67).toFixed(1),
                         max: (((9 / 5)  * cHour.main.temp_max) - 459.67).toFixed(1),
                         main: cHour.weather[0].description.charAt(0).toUpperCase() + cHour.weather[0].description.slice(1),
