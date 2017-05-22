@@ -69,7 +69,7 @@ router.route('/weather/:city')
             if (day && hourly) {
 
                 let weather = {
-                    date: new Date(new Date().toString() + ' UTC-' + timeOffset),
+                    date: new Date(new Date().toString() + ' UTC+' + timeOffset),
                     cityName: day.name,
                     icon: day.weather[0].icon,
                     temperature: (((9 / 5)  * day.main.temp) - 459.67).toFixed(1) + ' °F',
@@ -80,7 +80,7 @@ router.route('/weather/:city')
                 for (let i = 0; i < 5; i++) {
                     let cHour = hourly.list[i];
                     weather.hours[i] = {
-                        date: dateFormat(new Date(cHour.dt_txt + ' UTC-' + 4), 'ddd mmm d, h TT'),
+                        date: dateFormat(new Date(cHour.dt_txt + ' UTC+' + timeOffset), 'ddd mmm d, h TT'),
                         min: (((9 / 5)  * cHour.main.temp_min) - 459.67).toFixed(1),
                         max: (((9 / 5)  * cHour.main.temp_max) - 459.67).toFixed(1),
                         main: cHour.weather[0].description.charAt(0).toUpperCase() + cHour.weather[0].description.slice(1),
