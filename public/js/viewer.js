@@ -31,6 +31,10 @@ function reload(loc) {
     }
     loading = true;
     $.ajax('/' + location, {
+        type: "POST",
+        data: {
+            timeOffset: new Date().getTimezoneOffset()
+        },
         success: function(data) {
             $content.html(data);
             if (center) {
