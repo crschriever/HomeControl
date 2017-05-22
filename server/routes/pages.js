@@ -101,20 +101,24 @@ router.route('/weather/:city')
 
         request('http://api.openweathermap.org/data/2.5/weather?q=' + req.params.city + ',us&APPID=6e81c08216ea10e956e2447bfefba7a7', function (error, response, body) {
 
+            console.log(error);            
+
             if (error && !responded) {
                 responded = true;
                 res.json({"error": error});
-            } else {
+            } else if (!responded){
                 done(JSON.parse(body));
             }
         });
 
         request('http://api.openweathermap.org/data/2.5/forecast?q=' + req.params.city + ',us&APPID=6e81c08216ea10e956e2447bfefba7a7', function (error, response, body) {
 
+            console.log(error);
+
             if (error && !responded) {
                 responded = true;
                 res.json({"error": error});
-            } else {
+            } else if (!responded){
                 done(null, JSON.parse(body));
             }
         });
