@@ -19,6 +19,10 @@ iframe {
 	height: 100vh;
 }
 
+.viewer2 {
+	display:none;
+}
+
 .container-full {
 	width: 100vw;
 	height: 100vh;
@@ -69,6 +73,7 @@ iframe {
 }
 
 .weather-container-full {
+	position: relative;
 	background: url(https://report.az/storage/news/2d24481fa1ef4a20e1a703f88f8400c4/aee96c6d-d63a-4f9a-897e-3213b477b5fe.jpg) no-repeat center center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -89,19 +94,19 @@ iframe {
 	opacity: .7;
 }
 
-#weather-container {
+.weather-container {
 	display: block;
 	margin:0 auto;
 }
 
-#weather-sub-container {
+.weather-sub-container {
 	display: inline-block;
 	margin:0 auto;
 	position: relative;
 	margin-bottom: 8vh;
 }
 
-#weather-last-update {
+.weather-last-update {
 	position: absolute;
 	font-size:.8em;
 	font-weight: 700;
@@ -111,17 +116,17 @@ iframe {
 	font-size: 2.8em;
 }
 
-#weather-city-name {
+.weather-city-name {
 	font-weight: 900;
 	font-size: 1.8em;
 }
 
-#weather-img {
+.weather-img {
 	height: 10vh;
 	width:auto;
 }
 
-#weather-hourly-container {
+.weather-hourly-container {
 	display: inline-block;
 	margin: 0 auto;
 	position: relative;
@@ -144,7 +149,7 @@ iframe {
 	border-radius: 5px;
 }
 
-.weather-main {
+.hour-weather-main {
 	display: inline;
 	font-size: .4em;
 }

@@ -1,23 +1,24 @@
+<div class="autoLoad" style="display: none;">true</div>
 <div class="container-full weather-container-full">
-    <p id="weather-last-update" class=""> Last updated: <%= pageWeather.date.toLocaleTimeString("en-us") %></p>
+    <p class="weather-last-update"> Last updated: <%= pageWeather.date.toLocaleTimeString("en-us") %></p>
     <div class="weather-container vertical-center">
-        <div id="weather-sub-container" class="horizontal-center">
-            <h2 id="weather-city-name" class=""><%= pageWeather.cityName %></h2>
+        <div class="weather-sub-container horizontal-center">
+            <h2 class="weather-city-name"><%= pageWeather.cityName %></h2>
             <p>
-                <img id="weather-img" src="http://openweathermap.org/img/w/<%= pageWeather.icon %>.png">
-                <span id="weather-temperature"><%= pageWeather.temperature %>,</span>
-                <span id="weather-main" class=""><%= pageWeather.main %></span>
+                <img class="weather-img" src="http://openweathermap.org/img/w/<%= pageWeather.icon %>.png">
+                <span class="weather-temperature"><%= pageWeather.temperature %>,</span>
+                <span class="weather-main"><%= pageWeather.main %></span>
             </p>
         </div>
         <br>
-        <div id="weather-hourly-container" class="horizontal-center">
+        <div class="weather-hourly-container horizontal-center">
             <% for(let i = 0; i < pageWeather.hours.length; i++) { let hour = pageWeather.hours[i]; %>
 
                 <div class="weather-hour-container">
                     <h3 class="hour-date"><%= hour.date %></h3>
                     <div class="weather-min bg-info"><%= hour.min %></div>
                     <div class="weather-max bg-danger"><%= hour.max %></div>
-                    <div class="weather-main"><%= hour.main %></div>
+                    <div class="hour-weather-main"><%= hour.main %></div>
                 </div>
                 
             <% } %>
