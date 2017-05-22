@@ -35,7 +35,7 @@ function auto_reload() {
             reload();
             auto_reload();
         }
-    }, 500000);
+    }, 10 * 60 * 1000);
 }
 
 function reload(loc) {
