@@ -1,4 +1,5 @@
 var loading = false;
+var $loader;
 var currentLocation;
 var $content1;
 var $content2;
@@ -7,11 +8,12 @@ var keepLoading = false;
 
 $(function() {
     var socket = io(socketTarget);
+    var userID = $('#user-id-cont').text();
+    $loader = $('.loader');
+    $content1 = $('.viewer1');
+    $content2 = $('.viewer2');
 
     socket.on('connect', function(){
-        $content1 = $('.viewer1');
-        $content2 = $('.viewer2');
-        var userID = $('#user-id-cont').text();
 
         socket.emit('joinRoom', {
             userID: userID
@@ -33,7 +35,7 @@ function auto_reload() {
             reload();
             auto_reload();
         }
-    }, 10000);
+    }, 500000);
 }
 
 function reload(loc) {
@@ -47,6 +49,11 @@ function reload(loc) {
         return;
     }
     loading = true;
+    // Show loader if changing to a new page
+    if (loc) {
+        $loader.show();
+    }
+
     $.ajax('/' + location, {
         type: "POST",
         data: {
@@ -63,12 +70,17 @@ function reload(loc) {
             if (center) {
                 center();
             }
-            hidingContent.css('display', 'none');            
-            receivingContent.css('display', 'block');
+
+            setTimeout(function() {
+                hidingContent.css('z-index', '1');            
+                receivingContent.css('z-index', '2');
+                $loader.hide();                
+            }, 200);
 
             // If loading a new page check to see if it needs to be auto-reloaded
             if (loc) {
-                let autoReload = $('.autoLoad').text() === 'true';
+                let autoReload = receivingContent.find('.autoLoad').text() === 'true';
+                console.log("Should auto reload " + autoReload);
                 // If auto reload isn't already happening
                 if (!keepLoading && autoReload) {
                     keepLoading = true;
@@ -79,8 +91,11 @@ function reload(loc) {
                 }
             }
         },
+        error: function() {
+            $loader.hide();            
+        },
         complete: function() {
-            loading = false;    
+            loading = false;
         }
     });
 }
