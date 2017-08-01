@@ -1,3 +1,4 @@
+var socket
 var loading = false;
 var $loader;
 var currentLocation;
@@ -7,7 +8,7 @@ var last = 1;
 var keepLoading = false;
 
 $(function() {
-    var socket = io(socketTarget);
+    socket = io(socketTarget);
     var userID = $('#user-id-cont').text();
     $loader = $('.loader');
     $content1 = $('.viewer1');
@@ -67,15 +68,19 @@ function reload(loc) {
             last %= 2;
 
             receivingContent.html(data);
+
+            // If center is a function that exists then call it
             if (center) {
                 center();
             }
 
-            setTimeout(function() {
+            //setTimeout(function() {
                 hidingContent.css('z-index', '1');            
                 receivingContent.css('z-index', '2');
-                $loader.hide();                
-            }, 200);
+                hidingContent.html("");
+                $loader.hide();
+                loading = false;                           
+            //}, 200);
 
             // If loading a new page check to see if it needs to be auto-reloaded
             if (loc) {
@@ -92,10 +97,16 @@ function reload(loc) {
             }
         },
         error: function() {
-            $loader.hide();            
+            $loader.hide();
+            loading = false;                     
         },
         complete: function() {
-            loading = false;
         }
+    });
+}
+
+function changePage(url) {
+    socket.emit('changePage', {
+        location: url
     });
 }

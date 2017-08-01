@@ -1,5 +1,5 @@
 body{
-	background-color: lightgray;
+	background-color:white;
 	color:#424242;
 	font-family: Raleway, Arial, Helvetica, sans-serif;
 	letter-spacing: 1.2px;
@@ -17,6 +17,10 @@ p, div {
 iframe {
 	width: 100vw;
 	height: 100vh;
+}
+
+.scrollable {
+	overflow-y: scroll;
 }
 
 .vertical-center {
@@ -194,9 +198,234 @@ iframe {
 	font-size: .4em;
 }
 
+.list-sets-sub-container {
+	width: 50vw;
+}
+
+.list {
+	padding: 0;
+	margin: 20px 0;
+	border: #ddd solid 1px;
+	border-radius: 5px;
+	box-shadow: 0 3px 5px rgba(0,0,0,0.07);
+}
+
+.list-title-container {
+	width: 100%;
+	border-bottom: #ddd solid 1px; 
+	padding-left: 20px;
+	padding-bottom: 5px;
+	padding-top: 20px;
+	margin-bottom: 5px;
+}
+
+.list-title {
+	display: inline;
+}
+
+.new-list {
+	padding: 0;
+	margin: 20px 0;
+	border: #ddd solid 1px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.new-list-title {
+	padding: 15px;
+	color:#ddd;
+}
+
+.new-list:hover {
+	border-color: #444 solid 1px;
+}
+
+.new-list-title:hover {
+	color:#444;
+}
+
+.list-subtitle {
+	display: inline;
+	position: absolute;
+	right: 30px;
+	color: #444444;
+}
+
+.list-content-container {
+	padding: 0 0px 0 0px;
+	list-style: none;
+}
+
+.list-content-container > li {
+	-webkit-transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	transition: all .2s ease-in-out;
+}
+
+.list-checkbox-container {
+	display: inline-block;
+	width: 8%;
+	vertical-align: top;
+}
+
+.list-text-container {
+	display: inline-block;
+	width: 75%;
+}
+
+.list-text {
+	display: inline-block;
+	width: 90%;
+	margin-right: 5%; 
+	cursor: pointer;
+}
+
+.list-number-container {
+	display: inline-block;
+	width: 6%;
+	font-size: .9em;
+	vertical-align: top;
+	text-align: center;
+}
+
+.list-number-container > p {
+	width: 100%;
+}
+
+.list-delete-container {
+	display: inline-block;
+	width: 3%;
+	text-align: right;
+	vertical-align: top;
+	font-weight: 900;
+	cursor: pointer;
+}
+
+.list-content-container>li:hover>.list-delete-container::before,
+.list-group-item:hover>.list-delete-container::before {
+	content:"X";
+}
+
+.input-checkbox {
+	display: inline-block;
+	position: relative;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;	
+  	outline: 0;
+  	outline: none !important;
+	outline-style: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-appearance: none;
+	cursor: pointer;
+	width: 1.25rem;
+  	height: 1.25rem;
+}
+
+.input-checkbox:checked {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;	
+  	outline: 0;
+  	outline: none !important;
+	outline-style: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-appearance: none;
+}
+
+.input-checkbox::before {
+	content:"";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border: 2px gray solid;
+	-webkit-transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	transition: all .2s ease-in-out;
+}
+
+.input-checkbox:checked::before {
+	height: 50%;
+    transform: rotate(-45deg);
+	border-color: green;
+    border-top-style: none;
+    border-right-style: none;
+}
+
+.add-button {
+	display:none;
+	text-align: center;
+	background-color: #148a14;
+	color:white;
+	font-size: 1.6em;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	margin: 10px;
+	margin-top: 0px;
+	cursor: pointer;
+}
+
+.add-button:hover {
+	background-color: #1bb21b;
+}
+
+.add-button:active {
+	background-color: gray;
+}
+
+.add-button>span {
+	margin: 0 auto;
+	line-height: 30px;
+}
+
+.list:hover>.add-button {
+	display:block;
+}
+
+.text-input {
+	position:fixed;
+	top:30px;
+	margin:0 auto;
+	background-color: white;
+	border-radius: 15px;
+	box-shadow: 0 3px 5px rgba(0,0,0,0.07);
+	padding:20px;
+	z-index: 16;
+	width:300px;
+	left:calc(50vw - 150px);
+	display: none;
+}
+
+.text-input>label {
+	margin-bottom: 15px;
+}
+
+.shadow {
+	background-color: black;
+	opacity: .7;
+	z-index: 15;
+	position: fixed;
+	top:0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+.counted-fix.visible-md:nth-child(2n) {
+	display: none !important;
+}
+
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
+	.counted-fix.visible-lg {
+		display: none !important;	
+	}
 
+	.counted-fix.visible-lg:nth-child(9n) {
+		display: block !important;
+	}
 }
 
 /* Landscape tablets and medium desktops */

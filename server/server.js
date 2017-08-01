@@ -3,8 +3,8 @@ var express = require('express');
 var app = express();
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var io = require(getPath('server/websocket/socket.js'));
 var morgan = require('morgan');
-var io = require('socket.io')();
 var nconf = require('nconf');
 var mongoose = require('mongoose');
 var session = require('express-session');
@@ -12,7 +12,6 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var validator = require('express-validator');
 var MongoStore = require('connect-mongo')(session);
-var currentPage = {location: "clock"};
 
 // Use config file for nconf
 nconf.file(getPath('server/config.json'));
@@ -24,13 +23,40 @@ var dev = nconf.get('env') === 'dev';
 mongoose.Promise = require('bluebird');
 mongoose.connect('localhost:27017/HomeControl');
 
+if (dev) { // Add data for Lists
+    var ListGroup = require(getPath('server/models/todo'));
+
+    ListGroup.find({}, function(err, results) {
+        if (results.length <= 0 || (results.length == 1 && results[0].groups.length <= 0)) {
+            ListGroup.remove({}, function(err, results){
+                var groupOne = new ListGroup({
+                    name: "Example",
+                    groups: [
+                        {
+                            title: "Title one baby",
+                            items:[
+                                {text: "ubleq", checked: false},
+                                {text: "Who nkows", checked: false},
+                                {text: "But Why>", checked: true}
+                            ]
+                        },
+                        {
+                            title: "Title two baby",
+                            items:[
+                                {text: "ubleq", checked: false},
+                                {text: "But Why>", checked: true}
+                            ]
+                        }
+                    ]
+                });
+                groupOne.save();
+            });
+        }
+    });
+}
+
 // configure passport
 require(getPath('server/setup/passport'));
-
-// Add default users if there aren't any and we are in development
-if (dev) {
-    addDefaultUsers();
-}
 
 // Set socket url for socket.io to use in scripts
 app.locals.socketTarget = nconf.get('http:url') || 'localhost:3000';
@@ -68,7 +94,7 @@ app.use(passport.session());
 // Set up routes and static files
 app.use(express.static(getPath('public')));
 app.use('/user', require('./routes/login'));
-app.use(require('./routes/index')(changePage).router);
+app.use(require('./routes/index')(io.changePage).router);
 app.use(require('./routes/pages'));
 
 // catch 404 and forward to error handler
@@ -98,35 +124,9 @@ var server = app.listen(port || 3000, function () {
    console.log("App listening at http://%s:%s", host, port);
 });
 
-// Server sockets
+// Attach server socket
 io.attach(server);
-
-io.on('connection', function(socket) {
-
-    socket.on('joinRoom', function(data) {
-        socket.userRoom = data.userID;
-        socket.join(data.userID);
-        console.log('joining room ' + data.userID);
-    });
-
-    socket.emit('newPage', currentPage);
-
-    socket.on('changePage', function(data) {
-        console.log('changing room ' + socket.userRoom);
-        currentPage = data;      
-        io.to(socket.userRoom).emit('newPage', data);
-    });
-});
-
-function changePage(newPage) {
-    currentPage = {location: newPage};
-    io.emit('newPage', {location: newPage});   
-}
 
 function getPath(file) {
     return path.join(__dirname, '../' + file);
-}
-
-function addDefaultUsers() {
-    // TODO
 }

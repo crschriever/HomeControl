@@ -1,0 +1,27 @@
+
+<div class="list-sets-container container-full">
+    <div class="list-sets-sub-container vertical-center horizontal-center">
+        <h1>List Groups</h1>
+        <h6>Select by number</h6>
+        <ul class="list-group">
+            <% for (let i = 0; i < listSets.length; i++) { let set = listSets[i]; %>
+                <li class="list-group-item" data-name="<%= set %>">
+                    <div class="list-text" onclick="changePage('list/<%= set %>')"><%= (i + 1) + ': ' + set %></div>
+                    <div class="list-delete-container text-danger">
+                            </div>
+                </li>
+            <% } %>
+        </ul>
+        <div class="btn btn-primary new-list-button">New Group</div>  
+    </div>
+</div>
+
+<div class="text-input">
+    <label for="list-text-input">New note: </label>
+    <input id="list-text-input" type="text">
+    <br>
+    <div class="btn btn-success btn-sm">Enter</div>
+</div>
+<div class="shadow"></div>
+
+<% include ../templates/scripts.ejs %>

@@ -1,0 +1,67 @@
+
+<% let backgroundColors = ['#ffbaa0', 'lightsteelblue', 'cornsilk', 'honeydew', 'lightslategray', 'darkkhaki', 'lightgray']; %>
+
+<div class="container-full scrollable">
+
+    <% for (let i = 0; i < groups.length; i++) { let group = groups[i]; %>
+        <div class="list-container col-xs-12 col-md-6 col-lg-4">
+            <div class="list">
+                <div class="list-title-container" style="background-color:<%= backgroundColors[i % backgroundColors.length] %>;">
+                    <h3 class="list-title"><%= group.title %></h3>
+                    <h5 class="list-subtitle">List <%= i + 1 %></h5>
+                </div>
+                <ul class="list-content-container">
+                    <% for (let j = 0; j < group.items.length; j++) { let item = group.items[j]; %>
+                        <li>
+                            <div class="list-number-container">
+                                <p class="item-number"><%= j + 1 %></p>
+                            </div>
+                            <div class="list-checkbox-container">
+                                <% if (item.checked) { %>
+                                    <input type="checkbox" class="input-checkbox" checked>
+                                <% } else { %>
+                                    <input type="checkbox" class="input-checkbox">
+                                <% } %>
+                            </div>
+                            <div class="list-text-container">
+                                <p><%= item.text %></p>
+                            </div>
+                            <div class="list-delete-container text-danger">
+                            </div>
+                        </li>
+                    <% } %>
+                </ul>
+                <div class="add-button">
+                    <span>+</span>
+                </div>
+            </div>
+        </div>
+        <div class="counted-fix visible-md clearfix"></div>
+        <div class="counted-fix visible-lg clearfix"></div>
+    <% } %>
+
+    <div class="new-list-container col-xs-12 col-md-6 col-lg-4">
+        <div class="new-list">
+            <h3 class="new-list-title">New List</h3>
+        </div>
+    </div>
+
+</div>
+
+<div class="text-input">
+    <label for="list-text-input">New note: </label>
+    <input id="list-text-input" type="text">
+    <br>
+    <div class="btn btn-success btn-sm">Enter</div>
+</div>
+<div class="shadow"></div>
+
+<script>
+    var listName = "<%= name %>";
+    var backgroundColors = [];
+    <%  backgroundColors.forEach(function(color) { %>
+        backgroundColors.push("<%= color %>");
+    <% }) %>
+</script>
+
+<% include ../templates/scripts.ejs %>

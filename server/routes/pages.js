@@ -4,25 +4,7 @@ var path = require('path');
 var request = require('request');
 var dateFormat = require('dateformat');
 
-router.route('/home')
-    .post(function (req, res) {
-        res.send("Temporary Home page");
-    });
-
-router.route('/random1')
-    .post(function (req, res) {
-        res.send("Hi Elena");
-    });
-
-router.route('/random2')
-    .post(function (req, res) {
-        res.send("How're you little spaz?");
-    });
-
-router.route('/random3')
-    .post(function (req, res) {
-        res.send("Random3");
-    });
+var ListGroup = require('../models/todo.js');
 
 router.route('/clock')
     .post(function (req, res) {
@@ -124,4 +106,41 @@ router.route('/weather/:city')
         });
     });
 
+router.route('/lists')
+    .post(function(req, res) {
+        let listNames = [];
+        ListGroup.find({}, function(err, users) {
+            users.forEach(function(listGroup) {
+                listNames.push(listGroup.name);
+            });
+            res.render('partials/content/lists', {
+                pageId: "Lists",
+                pageTitle: "Lists",
+                pageDescription: "Home Control's lists page.",
+                pageCss: ['main'],
+                pageScripts: ['lists'],
+                useBootstrap: true,
+                listSets: listNames
+            });
+        });
+    });
+
+router.route('/list/:name')
+    .post(function(req, res) {
+
+        ListGroup.findOne({name: req.params.name}, function(err, list) {
+                        
+            res.render('partials/content/list', {
+                pageId: "List",
+                pageTitle: "List",
+                pageDescription: "Home Control's list page.",
+                pageCss: ['main'],
+                pageScripts: ['list'],
+                useBootstrap: true,
+                name: req.params.name,
+                groups: list.groups
+            });
+        });
+    });
+ 
 module.exports = router;
