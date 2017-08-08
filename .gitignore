@@ -31,3 +31,6 @@ npm-debug.log
 
 # Config file
 server/config.json
+
+# vscode's config file 
+.vscode
