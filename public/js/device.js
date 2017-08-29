@@ -1,7 +1,7 @@
-let $submitButton;
-let $textField;
-let $errorField;
-let csrf;
+var $submitButton;
+var $textField;
+var $errorField;
+var csrf;
 
 $(function() {
     $submitButton = $('.btn');
@@ -18,6 +18,7 @@ $(function() {
                 _csrf: csrf
             },
             success: function(data) {
+                alert('stting cookie');
                 var d = new Date();
                 d.setTime(d.getTime() + (365*24*60*60*1000));
                 document.cookie = "deviceName=" + data.deviceName + "; expires=" + d.toUTCString() + ";";
