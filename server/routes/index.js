@@ -44,6 +44,7 @@ router.route('/viewer')
         
         if (!req.cookies.deviceName) {
             res.redirect('/device');
+            return;
         }
 
         res.render('main/viewer', {
