@@ -417,6 +417,15 @@ iframe {
 	display: none !important;
 }
 
+.device-container {
+	padding-top: 60px;
+}
+
+.error {
+	display: none;
+	font-size: 2em;
+}
+
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
 	.counted-fix.visible-lg {

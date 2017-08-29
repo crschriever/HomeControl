@@ -1,5 +1,5 @@
 let io = require('socket.io')();
-let currentPage = {location: "clock"};
+let pageManager = require('../setup/deviceManager');
 let ListGroup = require('../models/todo.js');
 
 io.on('connection', function(socket) {
@@ -8,14 +8,13 @@ io.on('connection', function(socket) {
         socket.userRoom = data.userID;
         socket.join(data.userID);
         console.log('joining room ' + data.userID);
+        if (data.deviceName) {
+            socket.emit('newPage', {location: pageManager.getDeviceLocation(data.deviceName)});
+        }
     });
 
-    socket.emit('newPage', currentPage);
-
     socket.on('changePage', function(data) {
-        console.log('changing room ' + socket.userRoom);
-        currentPage = data;      
-        io.to(socket.userRoom).emit('newPage', data);
+        changePage(data.location, data.deviceName);
     });
 
     socket.on('addList', function(data) {
@@ -104,12 +103,14 @@ io.on('connection', function(socket) {
 
 });
 
+function changePage(newPage, deviceName) {
+    pageManager.setDeviceLocation(newPage, deviceName);
+    io.emit('newPage', {location: newPage, deviceName});
+}
+
 module.exports = {
     attach: function(server) {
         io.attach(server);
     },
-    changePage: function(newPage) {
-        currentPage = {location: newPage};
-        io.emit('newPage', {location: newPage});
-    }
+    changePage
 };

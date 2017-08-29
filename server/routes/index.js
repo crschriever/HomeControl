@@ -22,6 +22,11 @@ router.route('/')
 
 router.route('/switcher')
     .get(isLoggedIn, function (req, res) {
+
+        if (!req.cookies.deviceName) {
+            res.redirect('/device');
+        }
+
         res.render('main/switcher', {
             pageId: "Switcher",
             pageTitle: "Home Control Switcher",
@@ -36,6 +41,11 @@ router.route('/switcher')
 
 router.route('/viewer')
     .get(isLoggedIn, function (req, res) {
+        
+        if (!req.cookies.deviceName) {
+            res.redirect('/device');
+        }
+
         res.render('main/viewer', {
             pageId: "Viewer",
             pageTitle: "Home Control",
@@ -50,9 +60,7 @@ router.route('/viewer')
 
 router.post('/switch', function(req, res) {
     let action = req.body.result.action;
-
-    console.log(req.body.result);
-
+    
     // Show page intent
     if (action === 'show_page') {
         let page = req.body.result.parameters.page;

@@ -6,6 +6,7 @@ var $content1;
 var $content2;
 var last = 1;
 var keepLoading = false;
+var deviceName;
 
 $(function() {
     socket = io(socketTarget);
@@ -14,10 +15,13 @@ $(function() {
     $content1 = $('.viewer1');
     $content2 = $('.viewer2');
 
+    deviceName = getCookie('deviceName');
+    
     socket.on('connect', function(){
 
         socket.emit('joinRoom', {
-            userID: userID
+            userID: userID,
+            deviceName
         });
 
         socket.on('newPage', function(data) {
@@ -27,8 +31,6 @@ $(function() {
         });
     });
 });
-
-
 
 function auto_reload() {
     setTimeout(function() {
@@ -107,6 +109,23 @@ function reload(loc) {
 
 function changePage(url) {
     socket.emit('changePage', {
-        location: url
+        location: url,
+        deviceName
     });
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
 }

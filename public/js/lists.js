@@ -46,7 +46,6 @@
     });
 
     socket.on('deleteList', function(data) {
-        console.log(data);
         let deleteIndex = lists.findIndex(function(element) {return element.name === data.name});
         let deleteList = lists.splice(deleteIndex, 1)[0];
         deleteList.$list.remove();

@@ -94,6 +94,7 @@ app.use(passport.session());
 // Set up routes and static files
 app.use(express.static(getPath('public')));
 app.use('/user', require('./routes/login'));
+app.use('/device', require('./routes/device'));
 app.use(require('./routes/index')(io.changePage).router);
 app.use(require('./routes/pages'));
 
