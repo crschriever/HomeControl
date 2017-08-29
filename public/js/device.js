@@ -21,7 +21,7 @@ $(function() {
                 var d = new Date();
                 d.setTime(d.getTime() + (365*24*60*60*1000));
                 document.cookie = "deviceName=" + data.deviceName + "; expires=" + d.toUTCString() + ";";
-                window.location.replace('/viewer');
+                window.location = '/viewer';
             },
             error: function() {
                 $errorField.slideDown();
