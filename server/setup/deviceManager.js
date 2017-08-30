@@ -19,8 +19,6 @@ let deviceManager = {
 
     getDeviceLocation(deviceName) {
         deviceName = sanitizeName(deviceName);
-        console.log(deviceName);
-        console.log(this.devices);
         return findDeviceByName(deviceName).location;
     },
 
@@ -54,15 +52,13 @@ let deviceManager = {
     }
 }
 
-// deviceManager.addDevice('Laptop');
+deviceManager.addDevice('Laptop');
 
 function findDeviceByName(deviceName) {
     let device =  deviceManager.devices.find(function(element) {
-        console.log(element.name, deviceName, element.name === deviceName);
         return element.name === deviceName;
     });
 
-    console.log('Find Device:', device);
     return device;
 }
 

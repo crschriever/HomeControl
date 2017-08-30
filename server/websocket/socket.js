@@ -104,6 +104,7 @@ io.on('connection', function(socket) {
 });
 
 function changePage(newPage, deviceName) {
+    console.log(newPage, deviceName);
     pageManager.setDeviceLocation(newPage, deviceName);
     io.emit('newPage', {location: newPage, deviceName});
 }

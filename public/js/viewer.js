@@ -25,6 +25,10 @@ $(function() {
         });
 
         socket.on('newPage', function(data) {
+            if (data.deviceName && data.deviceName !== deviceName) {
+                console.log("Not changing page because device mismatch:", deviceName, "vs", data.deviceName)
+                return;
+            }
             console.log("New page: " + data.location);
             reload(data.location);
             currentLocation = data.location;            
