@@ -37,7 +37,6 @@ router.route('/weather/:city')
     .post(function(req, res) {
 
         let timeOffset = req.body.timeOffset / 60;
-        console.log(timeOffset);
         let day, hourly, responded = false;
 
         let done = function(d, h) {

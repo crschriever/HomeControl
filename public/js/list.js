@@ -40,8 +40,6 @@
             event.stopPropagation();
             event.stopImmediatePropagation();
 
-            console.log($textInput.text.val());
-
             if (textInputForNote) {
                 socket.emit('addListItem', {list: listName, box: target, text: $textInput.text.val()});
             } else {

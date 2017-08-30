@@ -25,13 +25,15 @@ $(function() {
         });
 
         socket.on('newPage', function(data) {
-            if (data.deviceName && data.deviceName !== deviceName) {
-                console.log("Not changing page because device mismatch:", deviceName, "vs", data.deviceName)
-                return;
-            }
-            console.log("New page: " + data.location);
-            reload(data.location);
-            currentLocation = data.location;            
+            data.devices.forEach(function(name) {
+                if (deviceName === name) {
+                    console.log("New page: " + data.location);
+                    reload(data.location);
+                    currentLocation = data.location;
+                    return; 
+                } else {
+                }
+            });           
         });
     });
 });
@@ -47,12 +49,9 @@ function auto_reload() {
 
 function reload(loc) {
 
-    console.log("Reload called");
-
     let location = loc || currentLocation;
 
     if (loading) {
-        console.log("Still loading");
         return;
     }
     loading = true;

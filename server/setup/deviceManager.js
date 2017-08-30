@@ -23,6 +23,7 @@ let deviceManager = {
     },
 
     setDeviceLocation(location, deviceNames) {
+        let retValues = [];
         if (deviceNames) {
             stringsToFind = [];
             if (typeof deviceNames === 'string') {
@@ -42,14 +43,19 @@ let deviceManager = {
                 var device = findDeviceByName(sanitizeName(stringsToFind[i]));
                 if (device) { // if device was found and is not undefined
                     device.location = location;
+                    retValues.push(device.name);
                 }
             }
         } else {
             this.devices.forEach(function(element) {
                 element.location = location;
+                retValues.push(element.name);                
             });
         }
-    }
+
+        return retValues;
+    },
+    sanitizeName
 }
 
 deviceManager.addDevice('Laptop');

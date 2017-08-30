@@ -9,7 +9,7 @@ io.on('connection', function(socket) {
         socket.join(data.userID);
         console.log('joining room ' + data.userID);
         if (data.deviceName) {
-            socket.emit('newPage', {location: pageManager.getDeviceLocation(data.deviceName)});
+            socket.emit('newPage', {location: pageManager.getDeviceLocation(data.deviceName), devices: [data.deviceName]});
         }
     });
 
@@ -32,7 +32,6 @@ io.on('connection', function(socket) {
     });
 
     socket.on('deleteList', function(data) {
-        console.log(data);
         ListGroup.findOneAndRemove({name: data.name}, function(err) {
             if (!err) {
                 io.emit('deleteList', data);
@@ -103,10 +102,9 @@ io.on('connection', function(socket) {
 
 });
 
-function changePage(newPage, deviceName) {
-    console.log(newPage, deviceName);
-    pageManager.setDeviceLocation(newPage, deviceName);
-    io.emit('newPage', {location: newPage, deviceName});
+function changePage(newPage, devices) {
+    devices = pageManager.setDeviceLocation(newPage, devices);
+    io.emit('newPage', {location: newPage, devices});
 }
 
 module.exports = {

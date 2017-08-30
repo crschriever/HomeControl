@@ -26,7 +26,6 @@ $(function() {
                         location: $(this).data('href'),
                     });
                 } else if ($device.val() !== "") {
-                    console.log($device.val());
                     socket.emit('changePage', {
                         location: $url.val(),
                         deviceName: $device.val()
