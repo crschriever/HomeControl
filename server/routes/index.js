@@ -65,10 +65,22 @@ router.post('/switch', function(req, res) {
     // Show page intent
     if (action === 'show_page') {
         let page = req.body.result.parameters.page;
-        indexRoute.changePage(page);
+        let devices = req.body.result.parameters;
+        indexRoute.changePage(page, devices);
+        let speech = "Showing " + page;
+        if (devices) {
+            speech += " on ";
+            devices.forEach(function(device, index) {
+                if (index - 1 === devices.length && devices.length !== 1) {
+                    speech += ", and " + device;
+                } else {
+                    speech += ", " + device;
+                }
+            });
+        }
         res.json({
-            "speech": "Showing " + page,
-            "displayText": "Showing " + page,
+            "speech": speech,
+            "displayText": speech,
             "source": "home.carlschriever.com",
             "data": {
                 "google": {
