@@ -65,7 +65,7 @@ router.post('/switch', function(req, res) {
     // Show page intent
     if (action === 'show_page') {
         let page = req.body.result.parameters.page;
-        let devices = req.body.result.parameters;
+        let devices = req.body.result.parameters.devices;
         indexRoute.changePage(page, devices);
         let speech = "Showing " + page;
         if (devices) {
