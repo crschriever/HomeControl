@@ -138,7 +138,6 @@ router.post('/switch', function(req, res) {
                 }
             }
         });
-        indexRoute.changePage('weather/' + location);        
     }
 });
 
