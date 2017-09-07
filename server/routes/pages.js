@@ -141,5 +141,19 @@ router.route('/list/:name')
             });
         });
     });
+
+router.route('/cheatsheet/:name')
+    .post(function(req, res) {
+        let sheet = req.params.name;
+        res.render('partials/content/cheatsheet', {
+            pageId: "Cheatsheet",
+            pageTitle: "CheatSheet",
+            pageDescription: "Home Control's cheat sheet page",
+            pageCss: ['main'],
+            pageScripts: [],
+            useBootstrap: true,
+            sheet,
+        });
+    });
  
 module.exports = router;

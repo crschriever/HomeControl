@@ -71,7 +71,7 @@ router.post('/switch', function(req, res) {
         if (devices) {
             speech += " on ";
             devices.forEach(function(device, index) {
-                if (index - 1 === devices.length && devices.length !== 1) {
+                if (index === devices.length - 1 && devices.length !== 1) {
                     speech += ", and " + device;
                 } else {
                     speech += ", " + device;
@@ -113,6 +113,32 @@ router.post('/switch', function(req, res) {
                 }
             }
         });
+    } else if (action === 'show_cheat_sheet') {
+        let page = 'cheatsheet/' + req.body.result.parameters.cheatsheet;
+        let devices = req.body.result.parameters.devices;
+        indexRoute.changePage(page, devices);
+        let speech = "Showing " + page;
+        if (devices) {
+            speech += " on ";
+            devices.forEach(function(device, index) {
+                if (index === devices.length - 1 && devices.length !== 1) {
+                    speech += ", and " + device;
+                } else {
+                    speech += ", " + device;
+                }
+            });
+        }
+        res.json({
+            "speech": speech,
+            "displayText": speech,
+            "source": "home.carlschriever.com",
+            "data": {
+                "google": {
+                    "expect_user_response": false,
+                }
+            }
+        });
+        indexRoute.changePage('weather/' + location);        
     }
 });
 
