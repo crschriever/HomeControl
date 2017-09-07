@@ -112,7 +112,7 @@ router.post('/switch', function(req, res) {
         indexRoute.changePage(page, devices);
         let speech = "Showing " + page;
         if (devices) {
-            speech +=  listDevices(devices);
+            speech += listDevices(devices);
         }
         res.json({
             "speech": speech,
@@ -134,7 +134,7 @@ function isLoggedIn(req, res, next) {
     res.redirect('/user/login');
 }
 
-function listDevice(devices) {
+function listDevices(devices) {
     let speech = " on ";
     devices.forEach(function(device, index) {
         if (index == 0) {
