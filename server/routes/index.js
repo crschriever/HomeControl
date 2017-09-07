@@ -134,7 +134,7 @@ function isLoggedIn(req, res, next) {
     res.redirect('/user/login');
 }
 
-function listDevice() {
+function listDevice(devices) {
     let speech = " on ";
     devices.forEach(function(device, index) {
         if (index == 0) {
