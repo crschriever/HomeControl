@@ -69,14 +69,7 @@ router.post('/switch', function(req, res) {
         indexRoute.changePage(page, devices);
         let speech = "Showing " + page;
         if (devices) {
-            speech += " on ";
-            devices.forEach(function(device, index) {
-                if (index === devices.length - 1 && devices.length !== 1) {
-                    speech += ", and " + device;
-                } else {
-                    speech += ", " + device;
-                }
-            });
+            speech +=  listDevices(devices);
         }
         res.json({
             "speech": speech,
@@ -119,14 +112,7 @@ router.post('/switch', function(req, res) {
         indexRoute.changePage(page, devices);
         let speech = "Showing " + page;
         if (devices) {
-            speech += " on ";
-            devices.forEach(function(device, index) {
-                if (index === devices.length - 1 && devices.length !== 1) {
-                    speech += ", and " + device;
-                } else {
-                    speech += ", " + device;
-                }
-            });
+            speech +=  listDevices(devices);
         }
         res.json({
             "speech": speech,
@@ -146,6 +132,20 @@ function isLoggedIn(req, res, next) {
         return next();
     }
     res.redirect('/user/login');
+}
+
+function listDevice() {
+    let speech = " on ";
+    devices.forEach(function(device, index) {
+        if (index == 0) {
+            speech += " " + device;
+        } else if (index === devices.length - 1 && devices.length !== 1) {
+            speech += ", and " + device;
+        } else {
+            speech += ", " + device;
+        }
+    });
+    return speech;
 }
 
 module.exports = function(changePage) {
