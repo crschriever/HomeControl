@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path')
+var deviceManager = require('../setup/deviceManager.js');
 
 // This is returned as the module
 var indexRoute = {
@@ -42,7 +43,7 @@ router.route('/switcher')
 router.route('/viewer')
     .get(isLoggedIn, function (req, res) {
         
-        if (!req.cookies.deviceName) {
+        if (!req.cookies.deviceName || !deviceManager.findDeviceByName(req.cookies.deviceName)) {
             res.redirect('/device');
             return;
         }
@@ -142,7 +143,7 @@ function isLoggedIn(req, res, next) {
 function listDevices(devices) {
     let speech = " on ";
     devices.forEach(function(device, index) {
-        if (index == 0) {
+        if (index === 0) {
             speech += " " + device;
         } else if (index === devices.length - 1 && devices.length !== 1) {
             speech += ", and " + device;

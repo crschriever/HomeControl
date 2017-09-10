@@ -28,7 +28,7 @@ let deviceManager = {
             stringsToFind = [];
             if (typeof deviceNames === 'string') {
                 stringsToFind[0] = deviceNames;
-            } else if (typeof deviceNames == 'object' && Array.isArray(deviceNames)) {
+            } else if (typeof deviceNames === 'object' && Array.isArray(deviceNames)) {
                 deviceNames.forEach(function(element) {
                     stringsToFind.push(element);
                 });
