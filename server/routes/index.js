@@ -69,7 +69,7 @@ router.post('/switch', function(req, res) {
         let devices = req.body.result.parameters.devices;
         indexRoute.changePage(page, devices);
         let speech = "Showing " + page;
-        if (devices.length != 0) {
+        if (devices && devices.length !== 0) {
             speech +=  listDevices(devices);
         }
         res.json({
@@ -87,7 +87,7 @@ router.post('/switch', function(req, res) {
         let location = req.body.result.parameters.location || 'Atlanta';
         indexRoute.changePage('weather/' + location, devices);
         let speech = "Showing weather for" + location;
-        if (devices) {
+        if (devices && devices.length !== 0) {
             speech += listDevices(devices);
         }
         res.json({
@@ -117,7 +117,7 @@ router.post('/switch', function(req, res) {
         let devices = req.body.result.parameters.devices;
         indexRoute.changePage(page, devices);
         let speech = "Showing " + page;
-        if (devices) {
+        if (devices && device.length !== 0) {
             speech += listDevices(devices);
         }
         res.json({
