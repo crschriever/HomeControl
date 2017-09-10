@@ -55,7 +55,8 @@ let deviceManager = {
 
         return retValues;
     },
-    sanitizeName
+    sanitizeName,
+    findDeviceByName
 }
 
 deviceManager.addDevice('Laptop');
