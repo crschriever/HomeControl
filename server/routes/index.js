@@ -85,7 +85,7 @@ router.post('/switch', function(req, res) {
     } else if (action === 'show_weather') {
         let devices = req.body.result.parameters.devices;
         let location = req.body.result.parameters.location || 'Atlanta';
-        indexRoute.changePage('weather/' + location);
+        indexRoute.changePage('weather/' + location, devices);
         let speech = "Showing weather for" + location;
         if (devices) {
             speech += listDevices(devices);
