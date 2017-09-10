@@ -68,7 +68,7 @@ router.post('/switch', function(req, res) {
         let devices = req.body.result.parameters.devices;
         indexRoute.changePage(page, devices);
         let speech = "Showing " + page;
-        if (devices) {
+        if (devices.length != 0) {
             speech +=  listDevices(devices);
         }
         res.json({
@@ -82,11 +82,16 @@ router.post('/switch', function(req, res) {
             }
         });
     } else if (action === 'show_weather') {
+        let devices = req.body.result.parameters.devices;
         let location = req.body.result.parameters.location || 'Atlanta';
         indexRoute.changePage('weather/' + location);
+        let speech = "Showing weather for" + location;
+        if (devices) {
+            speech += listDevices(devices);
+        }
         res.json({
-            "speech": "Showing weather for " + location,
-            "displayText": "Showing weather for " + location,
+            "speech": speech,
+            "displayText": speech,
             "source": "home.carlschriever.com",
             "data": {
                 "google": {
