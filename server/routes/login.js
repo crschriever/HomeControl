@@ -37,7 +37,7 @@ router.route('/login')
             error: req.flash('error')
         });
     }).post(passport.authenticate('local.login', {
-        successRedirect: '/viewer',
+        successRedirect: '/device',
         failureRedirect:'/user/login',
         failureFlash: true
     }));
